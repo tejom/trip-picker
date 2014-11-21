@@ -8,6 +8,14 @@ var AppActions = {
 			actionType: TripAppConstants.PAGE_INCREMENT,
 			data: page
 		})
+	},
+
+	addAttribute: function(data){
+		console.log('addAttribute action');
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.ADD_ATTRIBUTE,
+			data: data
+		})
 	}
 }
 

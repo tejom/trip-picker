@@ -24,7 +24,6 @@ var PageStore = merge(EventEmitter.prototype,{
 
 	addChangeListener: function(callback){
 		this.on(CHANGE_EVENT,callback);
-		console.log('listener added');
 	},
 	removeChangeListener: function(callback){
 		this.removeListener(CHANGE_EVENT,callback);
