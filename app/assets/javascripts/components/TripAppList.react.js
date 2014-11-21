@@ -1,7 +1,7 @@
 var React = require('react');
 var ListStore = require('../stores/ListStore');
 var ListItem = require('../components/ListItem.react');
-var ListSearch = require('../components/ListSearch.react');
+
 
 var AppActions = require('../actions/AppActions');
 
@@ -34,8 +34,9 @@ var TripAppList = React.createClass({
 			AppActions.addAttribute(data);
 	},
 
-	removeAttribute: function(key){
-		//implent
+	removeAttribute: function(data){
+		console.log(data);
+		AppActions.removeAttribute(data);
 	},
 
 	handleSearchInput: function(text){

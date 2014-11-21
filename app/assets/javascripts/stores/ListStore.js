@@ -17,17 +17,17 @@ var _attributes = [
 
 var _wantedAttributes = [];
 
-function addAttribute(data){
+function swapAttribute(data,fromArray,toArray){
 	var id = data.id;
 	var index = data.index;
 
-	var tempAttribute = $.grep(_attributes, function(i){			//finds the object that matches the given id
+	var tempAttribute = $.grep(fromArray, function(i){			//finds the object that matches the given id
 		return i.id === id;
 	});
-	arrayIndex = _attributes.indexOf(tempAttribute[0]);				//gets the index of thefound object in the array
+	arrayIndex = fromArray.indexOf(tempAttribute[0]);				//gets the index of thefound object in the array
 	
-	_attributes.splice(arrayIndex,1);
-	_wantedAttributes.push({'id': tempAttribute[0].id, 'value':tempAttribute[0].value});
+	fromArray.splice(arrayIndex,1);
+	toArray.push({'id': tempAttribute[0].id, 'value':tempAttribute[0].value});
 	
 }
 
@@ -60,7 +60,12 @@ AppDispatcher.register(function(payload){
 	switch(action.actionType){
 		case TripAppConstants.ADD_ATTRIBUTE:
 			console.log('iregistered add attribute');
-			addAttribute(action.data);
+			swapAttribute(action.data,_attributes,_wantedAttributes);
+			break;
+
+		case TripAppConstants.REMOVE_ATTRIBUTE:
+			console.log('iregistered add attribute');
+			swapAttribute(action.data,_wantedAttributes,_attributes);
 			break;
 
 		default:

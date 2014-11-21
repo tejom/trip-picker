@@ -16,6 +16,13 @@ var AppActions = {
 			actionType: TripAppConstants.ADD_ATTRIBUTE,
 			data: data
 		})
+	},
+	removeAttribute: function(data){
+		console.log('remove attribute action');
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.REMOVE_ATTRIBUTE,
+			data: data
+		})
 	}
 }
 
