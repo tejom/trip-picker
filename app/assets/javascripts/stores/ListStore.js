@@ -19,7 +19,6 @@ var _wantedAttributes = [];
 
 function swapAttribute(data,fromArray,toArray){
 	var id = data.id;
-	var index = data.index;
 
 	var tempAttribute = $.grep(fromArray, function(i){			//finds the object that matches the given id
 		return i.id === id;
@@ -59,12 +58,10 @@ AppDispatcher.register(function(payload){
 	console.log(action.data);
 	switch(action.actionType){
 		case TripAppConstants.ADD_ATTRIBUTE:
-			console.log('iregistered add attribute');
 			swapAttribute(action.data,_attributes,_wantedAttributes);
 			break;
 
 		case TripAppConstants.REMOVE_ATTRIBUTE:
-			console.log('iregistered add attribute');
 			swapAttribute(action.data,_wantedAttributes,_attributes);
 			break;
 

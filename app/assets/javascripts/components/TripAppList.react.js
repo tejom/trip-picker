@@ -1,5 +1,6 @@
 var React = require('react');
 var ListStore = require('../stores/ListStore');
+var LocationStore = require('../stores/LocationStore');
 var ListItem = require('../components/ListItem.react');
 
 
@@ -29,6 +30,10 @@ var TripAppList = React.createClass({
 			filter: ''
 		}
 	},
+	componentDidMount: function() {
+		AppActions.findAirport();
+
+	},
 	addAttribute: function(data){
 			console.log(data);
 			AppActions.addAttribute(data);
@@ -46,9 +51,6 @@ var TripAppList = React.createClass({
 			filter: value
 		});
 	},
-
-
-
 
 	render: function(){
 
@@ -85,8 +87,6 @@ var TripAppList = React.createClass({
 
 			</div>
 			);
-
-
 
 	},
 

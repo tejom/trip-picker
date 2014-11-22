@@ -23,7 +23,24 @@ var AppActions = {
 			actionType: TripAppConstants.REMOVE_ATTRIBUTE,
 			data: data
 		})
+	},
+	updateLocation: function(data){
+		console.log('update location action');
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.UPDATE_LOCATION,
+			data:data
+		})
+	},
+
+	findAirport: function(){
+		console.log('find apirpot action');
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.FIND_AIRPORT,
+			data: ''
+		});
+	
 	}
+
 }
 
 module.exports = AppActions;

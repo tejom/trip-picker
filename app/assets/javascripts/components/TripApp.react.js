@@ -1,7 +1,11 @@
 var React = require('react');
 var ListStore = require('../stores/ListStore');
 var PageStore = require('../stores/PageStore');
+var LocationStore = require('../stores/LocationStore');
+
 var TripAppList = require('../components/TripAppList.react')
+var TripAppLocation = require('../components/TripAppLocation.react');
+var TripAppResults = require('../components/TripAppResults.react');
 
 var AppActions = require('../actions/AppActions');
 
@@ -21,7 +25,8 @@ function getAllStates(){
 	return{
 		allList: ListStore.getAtrributes(),
 		wantedAttributes: ListStore.getWantedAttributes(),
-		currentPage: PageStore.getPage()
+		currentPage: PageStore.getPage(),
+		location: LocationStore.getLocation()
 
 	}
 }
@@ -35,11 +40,14 @@ var TripApp = React.createClass({
 	componentDidMount: function(){
 		PageStore.addChangeListener(this._onChange);
 		ListStore.addChangeListener(this._onChange);
+		LocationStore.addChangeListener(this._onChange);
+
 	},
 
 	componentWillUnmount: function() {
 		PageStore.removeChangeListener(this._onChange);
 		ListStore.removeChangeListener(this._onChange);
+		LocationStore.removeChangeListener(this._onChange);
 	},
 
 	nextPage: function(){
@@ -52,14 +60,17 @@ var TripApp = React.createClass({
 	render: function(){
 		var attributeList = this.state.allList;
 		var wantedAttributes = this.state.wantedAttributes;
-		console.log(attributeList);
+		var location = this.state.location;
 		return(
 			<div>
 				<h2>REact Works</h2>
-			
+				<TripAppLocation />
 				<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
 				<h3>Current Page {this.state.currentPage}</h3>
 				<button type="button" onClick={this.nextPage}>Next Page</button>
+				<TripAppResults 
+					wantedAttributes={wantedAttributes} 
+					location={location}/>
 			</div>
 			);
 	},
