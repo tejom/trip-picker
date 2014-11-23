@@ -46,7 +46,6 @@ var ListStore = merge(EventEmitter.prototype,{
 
 	addChangeListener: function(callback){
 		this.on(CHANGE_EVENT,callback);
-		console.log('list store listeners');
 	},
 	removeChangeListener: function(callback){
 		this.removeListener(CHANGE_EVENT,callback);
@@ -55,7 +54,6 @@ var ListStore = merge(EventEmitter.prototype,{
 
 AppDispatcher.register(function(payload){
 	var action= payload.action;
-	console.log(action.data);
 	switch(action.actionType){
 		case TripAppConstants.ADD_ATTRIBUTE:
 			swapAttribute(action.data,_attributes,_wantedAttributes);

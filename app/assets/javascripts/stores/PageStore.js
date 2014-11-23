@@ -34,7 +34,6 @@ var PageStore = merge(EventEmitter.prototype,{
 
 AppDispatcher.register(function(payload){
 	var action= payload.action;
-	console.log(action.data);
 	switch(action.actionType){
 		case TripAppConstants.PAGE_INCREMENT:
 			console.log('increment');

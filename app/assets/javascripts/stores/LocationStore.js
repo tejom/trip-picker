@@ -14,7 +14,6 @@ var _location = {
 
 function updateLocation(text){
 	_location.citySearch = text;
-	console.log('location updated' + text);
 }
 
 function findAirport(){
@@ -40,7 +39,6 @@ var LocationStore = merge(EventEmitter.prototype,{
 
 	addChangeListener: function(callback){
 		this.on(CHANGE_EVENT,callback);
-		console.log('location store listeners');
 	},
 	removeChangeListener: function(callback){
 		this.removeListener(CHANGE_EVENT,callback);
@@ -49,16 +47,13 @@ var LocationStore = merge(EventEmitter.prototype,{
 
 AppDispatcher.register(function(payload){
 	var action= payload.action;
-	console.log(action.data);
 	switch(action.actionType){
 		case TripAppConstants.UPDATE_LOCATION:
-			console.log('registered change location');
 			updateLocation(action.data);
 			findAirport();
 			break;
 
 		case TripAppConstants.FIND_AIRPORT:
-			console.log('regiter findAirport action');
 			findAirport();
 			break;
 

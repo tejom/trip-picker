@@ -61,18 +61,44 @@ var TripApp = React.createClass({
 		var attributeList = this.state.allList;
 		var wantedAttributes = this.state.wantedAttributes;
 		var location = this.state.location;
-		return(
-			<div>
-				<h2>REact Works</h2>
-				<TripAppLocation />
-				<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
-				<h3>Current Page {this.state.currentPage}</h3>
-				<button type="button" onClick={this.nextPage}>Next Page</button>
-				<TripAppResults 
-					wantedAttributes={wantedAttributes} 
-					location={location}/>
-			</div>
-			);
+		
+		switch(this.state.currentPage){
+			case 1:
+				return(
+					<div>
+					<h1> Welcome</h1>
+					<button type="button" onClick={this.nextPage}>Next Page</button>
+					</div>
+					);
+
+			case 2:
+				return(
+					<div>
+					<h1> Welcome</h1>
+					<TripAppLocation />
+					<button type="button" onClick={this.nextPage}>Next Page</button>
+					</div>
+					);
+
+			case 3:
+				return(
+					<div>
+					<h1> Welcome</h1>
+					<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
+					<button type="button" onClick={this.nextPage}>Next Page</button>
+					</div>
+					);
+
+			case 4:
+			return(
+				<div>
+					<TripAppResults 
+						wantedAttributes={wantedAttributes} 
+						location={location}/>
+					
+				</div>
+				);
+		}
 	},
 
 	_onChange: function(){
