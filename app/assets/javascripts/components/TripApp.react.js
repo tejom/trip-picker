@@ -65,27 +65,35 @@ var TripApp = React.createClass({
 		switch(this.state.currentPage){
 			case 1:
 				return(
-					<div>
-					<h1> Welcome</h1>
-					<button type="button" onClick={this.nextPage}>Next Page</button>
+					<div className='row'>
+					<div className='home-container col-xs-12 col-md-6 col-md-offset-3 '>
+						<h1 className='page-title'>Find a Trip</h1>
+							<div className='home'>
+								<div className='home-panel panel panel-default'>
+								<h2> Welcome</h2>
+								<button type="button" className="btn btn-next" onClick={this.nextPage}>Get Started!</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					);
 
 			case 2:
 				return(
-					<div>
-					<h1> Welcome</h1>
-					<TripAppLocation />
-					<button type="button" onClick={this.nextPage}>Next Page</button>
+					<div className='row'>
+					
+					<TripAppLocation nextPage={this.nextPage} currentPage={2} />
+					
 					</div>
 					);
 
 			case 3:
 				return(
-					<div>
-					<h1> Welcome</h1>
-					<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
-					<button type="button" onClick={this.nextPage}>Next Page</button>
+					<div className='row'>
+						<div className='list-container col-xs-12 col-md-6 col-md-offset-3 '>
+							<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
+							<button type="button" onClick={this.nextPage}>Next Page</button>
+						</div>
 					</div>
 					);
 

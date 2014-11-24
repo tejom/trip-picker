@@ -29,11 +29,24 @@ var TripAppResults = React.createClass({
 		this._getResults();
 	},
 
+	resetApp: function(){
+		AppActions.resetApp();
+	},
+
 	render: function(){
 
-		if(!this.state.ready){
+		if(!this.state.ready){				//hide results until all are ready to be displayed
 			return(
-				<h2>Waiting for results</h2>
+					<div className='location-container col-xs-12 col-md-6 col-md-offset-3 '>
+						<div className="result">
+							<div className='result-panel loading-panel panel panel-default'>
+							<svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+						   <circle className="path" fill="none" strokeWidth="6" strokeLinecap="round" cx="33" cy="33" r="30"></circle>
+						  	</svg>
+						  	<h3> Loading...</h3>
+						 </div>
+					</div>
+				</div>
 				);
 		}
 		else{
@@ -42,7 +55,7 @@ var TripAppResults = React.createClass({
 			<h2> Results</h2>
 			<h3> Your best city is {this.state.bestCityMatch}</h3>
 			<p> Average price of a  flight from {this.state.originCode} to {this.state.destCode} is {this.state.tripPrice}</p>
-
+			<button onClick={this.resetApp}> Find A new Trip</button>
 			</div>
 			);
 		}
@@ -61,7 +74,7 @@ var TripAppResults = React.createClass({
 		callback();
 	},
 
-	_findAirportCodes: function (callback){
+	_findAirportCodes: function (){
 		AirSearch.findAirport(TEST_MATCH,this._setAirportCode);
 		
 

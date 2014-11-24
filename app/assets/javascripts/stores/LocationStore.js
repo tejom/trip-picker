@@ -9,29 +9,63 @@ var CHANGE_EVENT='updateLocation';
 
 var _location = {
 		citySearch: '',
-		airportCode: []				//array of close airports
-};
+		airportCode: [],				//array of close airports
+}
+
+var _error = {
+	error: false,
+	message: ''
+}
+
 
 function updateLocation(text){
 	_location.citySearch = text;
 }
 
-function findAirport(){
+function setError(message) {
+	_error.error= true,
+	_error.message = message
 
+}
+
+function clearError(){
+	_error.error =  false,
+	_error.message= ''
+
+}
+
+
+
+function findAirport(){
+	
 	AirSearch.findAirport(_location.citySearch,setAirportCode);
 
 }
 
+
 function setAirportCode(data){
+
 	_location.airportCode = data;
+		
 }
 
+function resetLocation(){
+	_location = {
+		citySearch: '',
+		airportCode: []				//array of close airports
+	}
+}
 
 
 var LocationStore = merge(EventEmitter.prototype,{
 	getLocation: function(){
 		return _location;
 	},
+
+	getError: function(){
+		return _error;
+	},
+
 	//wrappers for node emmit, add/remove listeners functions
 	emitChange: function() {
 		this.emit(CHANGE_EVENT);
@@ -50,13 +84,15 @@ AppDispatcher.register(function(payload){
 	switch(action.actionType){
 		case TripAppConstants.UPDATE_LOCATION:
 			updateLocation(action.data);
-			findAirport();
 			break;
 
 		case TripAppConstants.FIND_AIRPORT:
 			findAirport();
 			break;
 
+		case TripAppConstants.RESET_APP:
+			resetLocation();
+			break;
 		default:
 			return true;
 		}

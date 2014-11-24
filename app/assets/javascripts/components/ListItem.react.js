@@ -13,7 +13,7 @@ var ListItem = React.createClass({
 
 	render: function(){
 		return(
-		<li key={this.props.key} onClick={this.click} >{this.props.value}</li>
+		<li className=' list-item list-group-item' key={this.props.key} onClick={this.click} >{this.props.value}</li>
 
 		);
 		}

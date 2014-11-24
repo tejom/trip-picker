@@ -31,7 +31,7 @@ var TripAppList = React.createClass({
 		}
 	},
 	componentDidMount: function() {
-		AppActions.findAirport();
+		//AppActions.findAirport();
 
 	},
 	addAttribute: function(data){
@@ -57,6 +57,7 @@ var TripAppList = React.createClass({
 		var list = this.props.attributeList;
 		var filter = this.state.filter;
 		var filteredList = [];
+		console.log(list);
 		list.forEach( function(attribute) {
 			if(attribute.value.indexOf(filter) !== -1){
 			filteredList.push(attribute);
@@ -71,20 +72,26 @@ var TripAppList = React.createClass({
 	
 
 		return(
-			<div>
-			<h2>App List</h2>
-			<input value={this.state.filter} ref="searchInput" onChange={this.handleSearchInput}/>
-			
-			<h2>Available</h2>
-			<ul>
-			 {attributeList} 
-			</ul>
-			
-			<h2>Selected</h2>
-			<ul>
-			 {wantedAttributeList}
-			</ul>
-
+			<div className='list'>
+				<div className='panel list-panel'>
+					<h2>What Qualities are Important to You?</h2>
+					<input value={this.state.filter} ref="searchInput" placeholder='Search...' onChange={this.handleSearchInput}/>
+					<div className='row'>	
+						<div className='col-xs-6'>
+							<h2>Available</h2>
+							<ul className='attribute-list list-group'>
+							 {attributeList} 
+							</ul>
+						</div>
+						
+						<div className='col-xs-6'>
+							<h2>Selected</h2>
+							<ul className='attribute-list list-group'>
+							 {wantedAttributeList}
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 			);
 

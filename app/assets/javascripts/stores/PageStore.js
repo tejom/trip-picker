@@ -5,11 +5,15 @@ var merge = require('react/lib/merge');
 
 var CHANGE_EVENT = 'change';
 
-var _pageNumber = 1;
+var _pageNumber = 1;///change to one
 
 function incrementPage(){
 	_pageNumber++;
 	console.log('page incremented' + _pageNumber);
+}
+
+function setPage(page){
+	_pageNumber=page;
 }
 
 var PageStore = merge(EventEmitter.prototype,{
@@ -38,6 +42,9 @@ AppDispatcher.register(function(payload){
 		case TripAppConstants.PAGE_INCREMENT:
 			console.log('increment');
 			incrementPage();
+			break;
+		case TripAppConstants.RESET_PAGE:
+			setPage(2);
 			break;
 
 		default:

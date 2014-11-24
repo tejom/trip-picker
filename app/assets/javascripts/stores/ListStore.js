@@ -28,8 +28,24 @@ function swapAttribute(data,fromArray,toArray){
 	fromArray.splice(arrayIndex,1);
 	toArray.push({'id': tempAttribute[0].id, 'value':tempAttribute[0].value});
 	
+	
 }
+function resetAttributes(){
 
+	_attributes = _attributes.concat(_wantedAttributes);
+	_wantedAttributes = [];
+	_attributes.sort( function(a,b){
+		if(a.id<b.id){
+			return -1;
+		}
+		if(a.id>b.id){
+			return 1;
+		}
+		else
+			return 0;
+	});
+
+}
 var ListStore = merge(EventEmitter.prototype,{
 	getAtrributes: function(){
 		return _attributes;
@@ -61,6 +77,10 @@ AppDispatcher.register(function(payload){
 
 		case TripAppConstants.REMOVE_ATTRIBUTE:
 			swapAttribute(action.data,_wantedAttributes,_attributes);
+			break;
+
+		case TripAppConstants.RESET_APP:
+			resetAttributes();
 			break;
 
 		default:

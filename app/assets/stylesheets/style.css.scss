@@ -1,0 +1,103 @@
+@import "bootstrap-sprockets";
+ @import "bootstrap";
+
+
+html {
+	background: url(image-path('bg1.jpg')) no-repeat center center fixed;
+	background-size: cover;
+}
+
+body{
+	background-color: transparent;
+}
+h1 {
+	color:#fff;
+	margin:20px;
+	text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+.home-container , .location-container , .list-container{
+	text-align: center;
+}
+.page-title{
+	margin-top: 100px;
+	margin-bottom: -80px;
+	font-size: 4em;
+}
+.home ,.location, .list ,.result{
+	background-color: rgba(255, 255, 255, 0.4);
+	margin-top: 30px;
+	text-align: center;
+	padding:30px;
+	box-shadow: 1px 1px 30px #aaa;
+
+}
+
+.home{
+	margin-top: 100px;
+}
+.panel{
+	padding:20px;
+}
+.home-panel .location-panel,.result-panel, .list-panel{
+	padding:30px;
+
+}
+
+.list-panel{
+	padding: auto 50px auto 50px;
+}
+
+.list-item{
+	margin-top: 9px;
+	border-radius: 4px;
+	box-shadow: 1px 1px 15px #aaa;
+}
+
+.btn-next:hover{
+	background-color: #bbb;
+}
+
+$offset: 187;
+$duration: 1.4s;
+
+.spinner {
+  animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.path {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation:
+    dash $duration ease-in-out infinite, 
+    colors ($duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% { stroke: #4285F4; }
+	25% { stroke: #DE3E35; }
+	50% { stroke: #F7C223; }
+	75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: $offset; }
+ 50% {
+   stroke-dashoffset: $offset/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: $offset;
+   transform:rotate(450deg);
+ }
+}

@@ -32,8 +32,14 @@ var AppActions = {
 		AppDispatcher.handleAction({
 			actionType: TripAppConstants.FIND_AIRPORT,
 			data: ''
-		});
+		})
 	
+	},
+	resetApp: function(){
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.RESET_APP,
+			data: ''
+		})
 	}
 
 }
