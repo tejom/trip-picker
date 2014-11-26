@@ -3,47 +3,64 @@ var AppActions = require('../actions/AppActions');
 var LocationStore = require('../stores/LocationStore');
 
 
-function getErrorState(){
-	return {
-		flash: LocationStore.getError()
-	}
+function getCityList(obj,callback){
+	var cityList = []
+	return $.ajax({
+		url:'api/v1/citys',
+		success: function(data){
+			console.log(data);
+			for(var key in data){
+				cityList.push(data[key].name);
+			}
+			obj.setState({city:cityList});
+
+			callback(obj);
+	
+		}
+	});
+
 }
+
+function setAutoCompleteList(obj){
+	var locationInput = obj.refs.locationInput.getDOMNode();
+			$(locationInput).autocomplete({
+			 	source: obj.state.city
+			 });
+
+}
+
 function getAllStates(){
-	return{
-		flash: LocationStore.getError()
-		
-	}
+	getCityList().done(function(data){
+		console.log(data);
+	})
+	return getCityList()
 }
 var TripAppLocation = React.createClass({
 
 	cities: [
-			"New York",
-			"Chicago",
-			"Los Angeles",
-			"Boston",
-			"Miami",
-			"Atlanta",
-			"Denver",
 			
 		],
 
 	getInitialState: function(){
-		return getAllStates();
-
+		
+		return {city: [] }
+		
 	},
 
 	componentDidMount: function() {
-		var locationInput = this.refs.locationInput.getDOMNode();
-		$(locationInput).autocomplete({
-		 	source: this.cities
-		 });
+		getCityList(this,setAutoCompleteList);
+		
+		console.log(this.state.city)
 		
 	},
 
+
+
 	render: function(){
 		
-		if(!this.state.flash.error){
-			return(
+		
+		return(
+
 			<div className='location-container col-xs-12 col-md-6 col-md-offset-3 '>
 				<div className='location'>
 					<div className='location-panel panel panel-default'>
@@ -55,14 +72,7 @@ var TripAppLocation = React.createClass({
 				</div>	
 			</div>
 			);
-		}
-		else{
-			return(
-				<div>
-				<p> looking</p>
-				</div>
-			);
-		}
+		
 	},
 
 	_buttonClick: function(){

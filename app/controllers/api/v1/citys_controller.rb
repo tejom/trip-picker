@@ -2,11 +2,12 @@ class Api::V1::CitysController < ApplicationController
 	respond_to :json
 
 	def index
-		render :json => 'text tes'
+		
+		render :json => Location.All
 	end
 
 	def show
-		@var = [params[:id]]
+		@var = [params[:attrib]]
 		render :json => @var
 
 	end
