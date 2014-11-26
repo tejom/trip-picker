@@ -5,7 +5,7 @@ var merge = require('react/lib/merge');
 
 var CHANGE_EVENT = 'change';
 
-var _pageNumber = 1;///change to one
+var _pageNumber = 3;///change to one
 
 function incrementPage(){
 	_pageNumber++;
