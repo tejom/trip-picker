@@ -11,13 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126155735) do
+ActiveRecord::Schema.define(version: 20141126202403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "locations", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "traits", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "traits", ["name"], name: "index_traits_on_name", using: :btree
+
+  create_table "weights", force: true do |t|
+    t.integer  "weight"
+    t.integer  "location_id"
+    t.integer  "trait_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

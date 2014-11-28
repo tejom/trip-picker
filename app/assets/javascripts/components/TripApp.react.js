@@ -23,7 +23,7 @@ function getPageState(){
 
 function getAllStates(){
 	return{
-		allList: ListStore.getAtrributes(),
+		attributes: ListStore.getAtrributes(),
 		wantedAttributes: ListStore.getWantedAttributes(),
 		currentPage: PageStore.getPage(),
 		location: LocationStore.getLocation()
@@ -31,13 +31,35 @@ function getAllStates(){
 	}
 }
 
+
+
 var TripApp = React.createClass({
 
+	getInitialAttributes: function(){
+		$.ajax({
+			url:'api/v1/traits',
+			success: function(data){
+				var array =[];
+				for( var key in data){
+					array.push( {id: data[key].id ,value: data[key].name });
+				}
+				this.setState({attributes: array});
+
+				return array;
+			}.bind(this)
+
+		});
+
+	},
+
 	getInitialState: function(){
+		
 		return getAllStates();				
 	},
 
 	componentDidMount: function(){
+		this.getInitialAttributes();
+
 		PageStore.addChangeListener(this._onChange);
 		ListStore.addChangeListener(this._onChange);
 		LocationStore.addChangeListener(this._onChange);
@@ -58,9 +80,11 @@ var TripApp = React.createClass({
 
 
 	render: function(){
-		var attributeList = this.state.allList;
+		var attributeList = this.state.attributes;
 		var wantedAttributes = this.state.wantedAttributes;
 		var location = this.state.location;
+
+		console.log(attributeList);
 		
 		switch(this.state.currentPage){
 			case 1:

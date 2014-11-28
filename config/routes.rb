@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get 'citys/:attrib' => 'citys#show'
       resources :citys, :except => :show
 
+      get 'traits/:name' => 'traits#show'
+      resources :traits, :except => :show
     end
 
   end

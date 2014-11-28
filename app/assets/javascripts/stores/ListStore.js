@@ -6,9 +6,18 @@ var merge = require('react/lib/merge');
 var CHANGE_EVENT = 'listChange';
 
 var _attributes = [
-]
+	{'id':0,'value':'hot'},
+	{'id':1,'value':'cold'},
+	{'id':2,'value':'sunny'},
+	{'id':3,'value':'cheap'},
+	{'id':4,'value':'exclusive'},
+	{'id':5,'value':'mountains'},
+	{'id':6,'value':'large city'}
+	]
 
 var _wantedAttributes = [];
+
+
 
 function swapAttribute(data,fromArray,toArray){
 	var id = data.id;
