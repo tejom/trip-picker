@@ -8,6 +8,12 @@ var AppActions = {
 			data: page
 		})
 	},
+	setInitialAttributes: function(data){
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.SET_ATTRIBUTES,
+			data: data
+		})
+	},
 
 	addAttribute: function(data){
 		AppDispatcher.handleAction({

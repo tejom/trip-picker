@@ -34,23 +34,23 @@ function getAllStates(){
 
 
 var TripApp = React.createClass({
-
-	getInitialAttributes: function(){
-		$.ajax({
-			url:'api/v1/traits',
-			success: function(data){
-				var array =[];
-				for( var key in data){
-					array.push( {id: data[key].id ,value: data[key].name });
-				}
-				this.setState({attributes: array});
-
-				return array;
-			}.bind(this)
-
-		});
-
+	setAttributes: function(callback){
+	console.log('set');
+	$.ajax({
+		url:'api/v1/traits',
+		success: function(data){
+			var array =[];
+			for( var key in data){
+				array.push( {id: data[key].id ,value: data[key].name });
+			}
+			
+			//_attributes = array;
+			//console.log(_attributes);
+			callback(array)
+			}
+		})
 	},
+
 
 	getInitialState: function(){
 		
@@ -58,11 +58,13 @@ var TripApp = React.createClass({
 	},
 
 	componentDidMount: function(){
-		this.getInitialAttributes();
+		
 
 		PageStore.addChangeListener(this._onChange);
 		ListStore.addChangeListener(this._onChange);
 		LocationStore.addChangeListener(this._onChange);
+
+		this.setAttributes(AppActions.setInitialAttributes);
 
 	},
 
@@ -105,16 +107,16 @@ var TripApp = React.createClass({
 			case 2:
 				return(
 					<div className='row'>
-					
+					<div className='list-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
 					<TripAppLocation nextPage={this.nextPage} currentPage={2} />
-					
+					</div>
 					</div>
 					);
 
 			case 3:
 				return(
 					<div className='row'>
-						<div className='list-container col-xs-12 col-md-6 col-md-offset-3 '>
+						<div className='list-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
 							<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
 							<button type="button" onClick={this.nextPage}>Next Page</button>
 						</div>
@@ -123,11 +125,12 @@ var TripApp = React.createClass({
 
 			case 4:
 			return(
-				<div>
+				<div className='row'>
+					<div className='list-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
 					<TripAppResults 
 						wantedAttributes={wantedAttributes} 
 						location={location}/>
-					
+					</div>
 				</div>
 				);
 		}
@@ -135,6 +138,7 @@ var TripApp = React.createClass({
 
 	_onChange: function(){
 		this.setState(getAllStates());
+		console.log('change');
 	}
 });
 

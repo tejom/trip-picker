@@ -77,18 +77,22 @@ var TripAppList = React.createClass({
 					<h2>What Qualities are Important to You?</h2>
 					<input value={this.state.filter} ref="searchInput" placeholder='Search...' onChange={this.handleSearchInput}/>
 					<div className='row'>	
-						<div className='col-xs-6'>
+						<div className='col-xs-6 att-floats'>
 							<h2>Available</h2>
+							<div className='att-list-container'>
 							<ul className='attribute-list list-group'>
 							 {attributeList} 
 							</ul>
+							</div>
 						</div>
 						
-						<div className='col-xs-6'>
+						<div className='col-xs-6 att-floats'>
 							<h2>Selected</h2>
+							<div className='att-list-container'>
 							<ul className='attribute-list list-group'>
 							 {wantedAttributeList}
 							</ul>
+							</div>
 						</div>
 					</div>
 				</div>
