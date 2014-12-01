@@ -29,7 +29,7 @@ module.exports = {
 		console.log(toString);
 
 		$.ajax({
-			url: "http://api.hotwire.com/v1/tripstarter/air?apikey=7ej9nc82g5vcbymtqdbb2csw&origin="+fromString+"&dest="+toString+"&format=jsonp&sort=price&sortorder=asc",
+			url: "https://api.hotwire.com/v1/tripstarter/air?apikey=7ej9nc82g5vcbymtqdbb2csw&origin="+fromString+"&dest="+toString+"&format=jsonp&sort=price&sortorder=asc",
 			dataType: 'jsonp',
 			timeout: 5000,
 			success: function(data){
