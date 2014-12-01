@@ -11,11 +11,12 @@
  * file per style scope.
  *
 
- 
+ @import "bootstrap-sprockets"
  *= require jquery-ui
-@import "bootstrap-sprockets"
+
 
  *= require_tree .
+ 
  *= require_self
  */
  
