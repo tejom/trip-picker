@@ -92,7 +92,7 @@ var TripApp = React.createClass({
 			case 1:
 				return(
 					<div className='row'>
-					<div className='home-container col-xs-12 col-md-6 col-md-offset-3 '>
+					<div className='home-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 '>
 						<h1 className='page-title'>Find a Trip</h1>
 							<div className='home'>
 								<div className='home-panel panel panel-default'>

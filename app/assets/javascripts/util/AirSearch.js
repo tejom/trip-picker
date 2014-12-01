@@ -15,25 +15,34 @@ module.exports = {
 		url: "https://airport.api.aero/airport/match/" + city + "?user_key=9638a0f3d8ab35bb6e22f060025d279a",
 		success:function(data){
 			console.log(data);
-			return callback(data.airports);
+			return callback(city,data.airports);
 			},
 		dataType: 'jsonp'
 
 	});
 	},
 
-	findPrice: function(fromLocation,toLocation,callback){
+	findPrice: function(fromLocation,toLocation,callback,city){
+		console.log(fromLocation);
 		fromString=this.generateCodeString(fromLocation);
 		toString=this.generateCodeString(toLocation);
-		console.log(fromString);
+		console.log(toString);
 
 		$.ajax({
 			url: "http://api.hotwire.com/v1/tripstarter/air?apikey=7ej9nc82g5vcbymtqdbb2csw&origin="+fromString+"&dest="+toString+"&format=jsonp&sort=price&sortorder=asc",
+			dataType: 'jsonp',
+			timeout: 5000,
 			success: function(data){
-				callback(data.Result[0])
+				callback(data.Result[0],city)
 				console.log(data);
 			},
-			dataType: 'jsonp'
+			error: function (request, textStatus, errorThrown) {
+		       console.log(request.responseText);
+		       console.log(textStatus);
+		       console.log(errorThrown);
+		       callback(null,city);
+		   }
+			
 		});
 	}
 

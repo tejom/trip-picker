@@ -43,7 +43,7 @@ function findAirport(){
 }
 
 
-function setAirportCode(data){
+function setAirportCode(city,data){
 
 	_location.airportCode = data;
 		

@@ -15,15 +15,11 @@ class Api::V1::CitysController < ApplicationController
 
 		@attribArray.each { |t| 
 			@t = Trait.find_by name: t
-			puts "ok" 
-			puts t
 			@l = @t.locations.includes(:weights).select('*')
 			#need to handle empty results
 			@l.each { |l|
-				puts l.name
-				puts l.weight
 				weightTracker[l.name] = l.weight + weightTracker[l.name]
-				puts weightTracker[l.name]
+				
 
 			}
 		}
@@ -31,12 +27,15 @@ class Api::V1::CitysController < ApplicationController
 		weightTracker.each { |w| puts w}
 		
 
-		@biggest = largest_hash_key(weightTracker)
-		render :json => weightTracker
+		@biggest = largest_key(weightTracker)
+		render :json => @biggest
+
 
 	end
 
-	def largest_hash_key(hash)
-		hash.max_by {|k,v| v }
+	def largest_key(hash)
+		arr = []
+		hash.each {|k,v| arr << k if v == hash.values.max }
+		return arr
 	end
 end

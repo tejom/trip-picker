@@ -7,7 +7,7 @@ var TEST_MATCH = 'Miami'
 var resultInfo = {
 	bestCityMatch:'',
 	resultAirportCode: [ ],
-	tripPrice:'',
+	tripPrice:9999,
 	originCode:'',
 	destCode:'',
 	ready:false
@@ -26,7 +26,7 @@ var TripAppResults = React.createClass({
 	},
 
 	componentDidMount: function(){
-		this._getResults();
+		this._getResults(this.props.wantedAttributes);
 	},
 
 	resetApp: function(){
@@ -53,7 +53,7 @@ var TripAppResults = React.createClass({
 		return(
 			<div>
 			<h2> Results</h2>
-			<h3> Your best city is {this.state.bestCityMatch}</h3>
+			<h3> Your best city is {this.state.resultCity}</h3>
 			<p> Average price of a  flight from {this.state.originCode} to {this.state.destCode} is {this.state.tripPrice}</p>
 			<button onClick={this.resetApp}> Find A new Trip</button>
 			</div>
@@ -61,53 +61,98 @@ var TripAppResults = React.createClass({
 		}
 	},
 
-	_getResults: function(){
+	_getResults: function(traits){
+		console.log('getting traits');
+		console.log(traits);
+
 		this._getBestMatch(
-			this._findAirportCodes
+			this._findAirportCodes,
+			traits
 			);
 		
 		
 	},
 
-	_getBestMatch: function(callback){
-		this.setState( { bestCityMatch: TEST_MATCH});
-		callback();
+	_getBestMatch: function(callback,traits){
+		this.setState( {currentCity : 0});
+		url = '';
+
+		for(var key in traits){
+			url = url + 'trait[]=' + traits[key].value + '&';
+		}
+		url=url.substring(0,url.length-1);
+		console.log(url);
+
+		$.ajax({
+			url: '/api/v1/citys/id?' + url,
+			success: function(data){
+				console.log(data);
+				//this.setState( { bestCityMatch: TEST_MATCH});
+				callback(data);
+			}
+		});
+		
 	},
 
-	_findAirportCodes: function (){
-		AirSearch.findAirport(TEST_MATCH,this._setAirportCode);
+	_findAirportCodes: function (data){
+		this.setState( { bestCityMatch: data});
+
+		for(var key in data){
+			var current = this.state.currentCity + 1;
+			this.setState( {currentCity : current});
+			console.log(this.state.currentCity);
+			AirSearch.findAirport(data[key],this._setAirportCode);
+		}
+
 		
 
 	},
-	_setAirportCode: function (data){
+	_setAirportCode: function (city,data){
 		var codeList =[];
 		for(key in data){
 			codeList.push(data[key].code);
 		}
+		
 
-		this.setState({resultAirportCode: codeList});
-		console.log(this.state.resultAirportCode);
-		this._findPrice();
+		//this.setState({resultAirportCode: cityState });
+		//console.log(this.state.resultAirportCode);
+		
+		this._findPrice(city,codeList);
 
 		
 	},
 
-	_findPrice: function (){
+	_findPrice: function (city,destinationList){
+		console.log(city);
+		console.log(destinationList);
 		var airportFromList = this.props.location.airportCode;
 		var airportCodeList = [];
-		for(key in airportFromList){
+		for(var key in airportFromList){
 			airportCodeList.push(airportFromList[key].code);
 		}
-		AirSearch.findPrice(airportCodeList,this.state.resultAirportCode,this._setTripInfo);
+		console.log(airportCodeList);
+		console.log(airportFromList);		
+		AirSearch.findPrice(airportCodeList,destinationList,this._setTripInfo,city);
+		
 		
 	},
-	_setTripInfo: function (data){
+	_setTripInfo: function (data,city){
 		console.log(data);
-		this.setState({tripPrice: data.AveragePrice,
-						originCode: data.OrigAirportCode,
-						destCode: data.DestinationAirportCode,
-						ready:true
-					});
+		if(data){										//might get null data when there is an error from api
+			if(data.AveragePrice< this.state.tripPrice){
+				this.setState({	resultCity: city,
+								tripPrice: data.AveragePrice,
+								originCode: data.OrigAirportCode,
+								destCode: data.DestinationAirportCode,
+								
+							});
+				console.log(city + ' , ' + this.state.bestCityMatch[this.state.bestCityMatch.length-1]);
+			}
+		}
+
+		if(city == this.state.bestCityMatch[this.state.bestCityMatch.length-1]){
+			this.setState({ready:true});
+		}
 	}
 
 });
