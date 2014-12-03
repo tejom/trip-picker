@@ -1,15 +1,18 @@
 @import "bootstrap-sprockets";
  @import "bootstrap";
 
+@import url(http://fonts.googleapis.com/css?family=Nothing+You+Could+Do);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);
 
 html {
-	background: url(image-path('bg1.jpg')) no-repeat center center fixed;
+	background: url(image-path('bg02.jpg')) no-repeat center center fixed;
 	background-size: cover;
 
 }
 
 body{
 	background-color: transparent;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
 html,body{
@@ -28,9 +31,17 @@ h1 {
 .home-container , .location-container , .list-container{
 	text-align: center;
 }
-.page-title{
+.site-title{
 	margin-top: 100px;
 	margin-bottom: -80px;
+	font-size: 4em;
+	font-family: 'Nothing You Could Do', cursive;
+}
+.page-title{
+	font-family: 'Josefin Sans', sans-serif;
+}
+.home-title{
+	margin-bottom: -20px;
 	font-size: 4em;
 }
 .home ,.location, .list ,.result{
@@ -49,6 +60,7 @@ h1 {
 .panel{
 	padding:30px;
 	height: 100%;
+	margin-bottom: 0;
 }
 
 /*list mobile */
@@ -73,7 +85,7 @@ h1 {
 
 .list-container{
 	/*min-height:90%; */
-	
+
 	
 }
 .att-list-container{
@@ -84,6 +96,7 @@ h1 {
 	padding-right: 8px;
 	max-width: 150px;
 	margin: auto;
+	border-bottom: 1px solid #ccc;
 
 }
 
@@ -104,9 +117,34 @@ h1 {
 	border-radius: 4px;
 	box-shadow: 1px 1px 15px #aaa;
 }
+$btn-color-1: #FFFFD1;
+$btn-color-2: #E6E6BC;
 
+.btn-next{
+ 	background-color: btn-color-1; background-image: -webkit-gradient(linear, left top, left bottom, from($btn-color-1), to($btn-color-2));
+ 	background-image: -webkit-linear-gradient(top, $btn-color-1, $btn-color-2);
+ 	background-image: -moz-linear-gradient(top, $btn-color-1, $btn-color-2);
+ 	background-image: -ms-linear-gradient(top, $btn-color-1, $btn-color-2);
+	background-image: -o-linear-gradient(top, $btn-color-1, $btn-color-2);
+	background-image: linear-gradient(to bottom, $btn-color-1, $btn-color-2);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=$btn-color-1, endColorstr=$btn-color-2);
+ 	margin:30px auto 10px auto ;
+	border: 1px solid #444;
+	border-radius: 0px;
+	box-shadow: 1px 1px 3px #aaa;
+	padding: 10px 40px;
+	font-size: 1.3em
+}
+
+$btn-hover-color-1:#E68A5C;
+$btn-hover-color-2:#E68A5C;
 .btn-next:hover{
-	background-color: #bbb;
+	 background-color: $btn-hover-color-1; background-image: -webkit-gradient(linear, left top, left bottom, from($btn-hover-color-1), to($btn-hover-color-2));
+ background-image: -webkit-linear-gradient(top, $btn-hover-color-1, $btn-hover-color-2);
+ background-image: -moz-linear-gradient(top, $btn-hover-color-1, $btn-hover-color-2);
+ background-image: -ms-linear-gradient(top, $btn-hover-color-1, $btn-hover-color-2);
+ background-image: -o-linear-gradient(top, $btn-hover-color-1, $btn-hover-color-2);
+ background-image: linear-gradient(to bottom, $btn-hover-color-1, $btn-hover-color-2);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=$btn-hover-color-1, endColorstr=$btn-hover-color-2);
+	box-shadow: 1px 1px 1px #aaa;
 }
 
 $offset: 187;

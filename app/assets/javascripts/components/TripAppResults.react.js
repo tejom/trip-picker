@@ -10,7 +10,7 @@ var resultInfo = {
 	tripPrice:9999,
 	originCode:'',
 	destCode:'',
-	ready:false
+	ready:false //set false
 
 }
 
@@ -37,7 +37,7 @@ var TripAppResults = React.createClass({
 
 		if(!this.state.ready){				//hide results until all are ready to be displayed
 			return(
-					<div className='location-container col-xs-12 col-md-6 col-md-offset-3 '>
+					<div className='location-container '>
 						<div className="result">
 							<div className='result-panel loading-panel panel panel-default'>
 							<svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -51,11 +51,15 @@ var TripAppResults = React.createClass({
 		}
 		else{
 		return(
-			<div>
-			<h2> Results</h2>
-			<h3> Your best city is {this.state.resultCity}</h3>
-			<p> Average price of a  flight from {this.state.originCode} to {this.state.destCode} is {this.state.tripPrice}</p>
-			<button onClick={this.resetApp}> Find A new Trip</button>
+			<div className='location-container  '>
+				<div className="result">
+					<div className='result-panel panel panel-default'>
+					<h2 className="page-title"> Results</h2>
+					<h3> Your best city is {this.state.resultCity}</h3>
+					<p> Average price of a  flight from {this.state.originCode} to {this.state.destCode} is ${this.state.tripPrice}</p>
+					<button onClick={this.resetApp} className="btn btn-next"> Find A new Trip</button>
+					</div>
+				</div>
 			</div>
 			);
 		}

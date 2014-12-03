@@ -93,10 +93,10 @@ var TripApp = React.createClass({
 				return(
 					<div className='row'>
 					<div className='home-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 '>
-						<h1 className='page-title'>Find a Trip</h1>
+						<h1 className='site-title'>Find a Trip</h1>
 							<div className='home'>
 								<div className='home-panel panel panel-default'>
-								<h2> Welcome</h2>
+								<h2 className="page-title home-title"> Welcome</h2>
 								<button type="button" className="btn btn-next" onClick={this.nextPage}>Get Started!</button>
 								</div>
 							</div>
@@ -107,7 +107,7 @@ var TripApp = React.createClass({
 			case 2:
 				return(
 					<div className='row'>
-					<div className='list-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
+					<div className='location-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
 					<TripAppLocation nextPage={this.nextPage} currentPage={2} />
 					</div>
 					</div>
@@ -117,8 +117,8 @@ var TripApp = React.createClass({
 				return(
 					<div className='row'>
 						<div className='list-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
-							<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes}/>
-							<button type="button" onClick={this.nextPage}>Next Page</button>
+							<TripAppList attributeList={attributeList} wantedAttributes={wantedAttributes} nextPage={this.nextPage} currentPage={3} />
+							
 						</div>
 					</div>
 					);

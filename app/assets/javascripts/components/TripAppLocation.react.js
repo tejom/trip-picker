@@ -61,10 +61,10 @@ var TripAppLocation = React.createClass({
 		
 		return(
 
-			<div className='location-container col-xs-12 col-md-6 col-md-offset-3 '>
+			<div >
 				<div className='location'>
 					<div className='location-panel panel panel-default'>
-						<h2 className='pageTitle'> "What's your location?"</h2>
+						<h2 className="page-title"> Whats your location? </h2>
 						<input id='location-input' ref='locationInput' placeholder={"Enter a US City..."} onBlur={this._save}/>
 						<br />
 						<button type="button" className="btn btn-next" onClick={this._buttonClick}>Next Page</button>

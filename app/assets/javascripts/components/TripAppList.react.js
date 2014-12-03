@@ -55,11 +55,13 @@ var TripAppList = React.createClass({
 	render: function(){
 
 		var list = this.props.attributeList;
-		var filter = this.state.filter;
+		var filter = this.state.filter.toLowerCase();
 		var filteredList = [];
 		console.log(list);
 		list.forEach( function(attribute) {
-			if(attribute.value.indexOf(filter) !== -1){
+			attributeText = attribute.value.toLowerCase();
+
+			if(attributeText.indexOf(filter) !== -1){
 			filteredList.push(attribute);
 			}
 			
@@ -84,6 +86,7 @@ var TripAppList = React.createClass({
 							 {attributeList} 
 							</ul>
 							</div>
+							<span className="list-dots"> . . . </span>
 						</div>
 						
 						<div className='col-xs-6 att-floats'>
@@ -93,11 +96,18 @@ var TripAppList = React.createClass({
 							 {wantedAttributeList}
 							</ul>
 							</div>
+							<span className="list-dots"> . . . </span>
 						</div>
+						<button type="button" className="btn btn-next" onClick={this._buttonClick}>Next Page</button>
 					</div>
 				</div>
 			</div>
 			);
+
+	},
+	_buttonClick: function(){
+		AppActions.findAirport();
+		this.props.nextPage(this.props.currentPage);
 
 	},
 
