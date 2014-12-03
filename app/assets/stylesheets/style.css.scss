@@ -119,9 +119,10 @@ h1 {
 }
 
 .list-item{
+	cursor: pointer;
 	margin-top: 9px;
 	border-radius: 4px;
-	box-shadow: 1px 1px 15px #aaa;
+	box-shadow: 1px 1px 10px #aaa;
 }
 $btn-color-1: #FFFFD1;
 $btn-color-2: #E6E6BC;
