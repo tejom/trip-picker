@@ -34,8 +34,14 @@ h1 {
 .site-title{
 	margin-top: 100px;
 	margin-bottom: -80px;
-	font-size: 4em;
+	font-size: 3.5em;
 	font-family: 'Nothing You Could Do', cursive;
+}
+@media(min-width: 400px){
+	.site-title{
+		font-size: 4.3em;
+		
+	}
 }
 .page-title{
 	font-family: 'Josefin Sans', sans-serif;
