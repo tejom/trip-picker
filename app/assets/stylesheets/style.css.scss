@@ -167,6 +167,10 @@ $btn-hover-color-2:#E68A5C;
 $offset: 187;
 $duration: 1.4s;
 
+.flash-message{
+	margin: 10px auto 0px auto;
+}
+
 .spinner {
   animation: rotator $duration linear infinite;
 }

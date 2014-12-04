@@ -6,6 +6,7 @@ var merge = require('react/lib/merge');
 var AirSearch = require('../util/AirSearch');
 
 var CHANGE_EVENT='updateLocation';
+var PAGE_EVENT='changePage';
 
 var _location = {
 		citySearch: '',
@@ -79,12 +80,15 @@ var LocationStore = merge(EventEmitter.prototype,{
 	},
 
 	//wrappers for node emmit, add/remove listeners functions
-	emitChange: function() {
+	emitChange: function(event) {
 		this.emit(CHANGE_EVENT);
 	},
 
 	addChangeListener: function(callback){
 		this.on(CHANGE_EVENT,callback);
+	},
+	addPageListener: function(callback){
+		this.on(PAGE_EVENT,callback);
 	},
 	removeChangeListener: function(callback){
 		this.removeListener(CHANGE_EVENT,callback);
@@ -104,7 +108,13 @@ AppDispatcher.register(function(payload){
 
 		case TripAppConstants.RESET_APP:
 			resetLocation();
+			clearError();
 			break;
+		case TripAppConstants.SET_ERROR:
+			console.log('setting error');
+			console.log(action.data);
+			setError(action.data);
+			LocationStore.emitChange(CHANGE_EVENT);
 		default:
 			return true;
 		}

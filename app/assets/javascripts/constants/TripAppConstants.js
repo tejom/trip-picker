@@ -7,5 +7,6 @@ module.exports = keyMirror({
 	ADD_ATTRIBUTE:null,
 	REMOVE_ATTRIBUTE:null,
 	UPDATE_LOCATION:null,
-	FIND_AIRPORT:null
+	FIND_AIRPORT:null,
+	SET_ERROR:null
 });

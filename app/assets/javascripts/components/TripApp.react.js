@@ -109,7 +109,7 @@ var TripApp = React.createClass({
 				return(
 					<div className='row'>
 					<div className='location-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'>
-					<TripAppLocation nextPage={this.nextPage} currentPage={2} />
+					<TripAppLocation nextPage={this.nextPage} currentPage={2} location={location} />
 					</div>
 					</div>
 					);

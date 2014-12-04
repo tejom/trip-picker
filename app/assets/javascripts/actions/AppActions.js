@@ -46,6 +46,12 @@ var AppActions = {
 			actionType: TripAppConstants.RESET_APP,
 			data: ''
 		})
+	},
+	setError: function(data){
+		AppDispatcher.handleAction({
+			actionType: TripAppConstants.SET_ERROR,
+			data: data
+		})
 	}
 
 }

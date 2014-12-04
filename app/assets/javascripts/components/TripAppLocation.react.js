@@ -1,6 +1,7 @@
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var LocationStore = require('../stores/LocationStore');
+var FlashMessage = require('../components/FlashMessage.react');
 
 
 function getCityList(obj,callback){
@@ -29,27 +30,46 @@ function setAutoCompleteList(obj){
 
 }
 
+function getError(){
+	return LocationStore.getError();
+}
+
 function getAllStates(){
 	getCityList().done(function(data){
 		console.log(data);
 	})
-	return getCityList()
+	return {
+		city: getCityList(),
+		error: getError()
+	}
+}
+
+function validateInput(input){
+	if(input){
+		return true;
+	}
+	return false;
 }
 var TripAppLocation = React.createClass({
 
 	cities: [
 			
 		],
-
+	changePage: function(){
+		
+	},
 	getInitialState: function(){
 		
-		return {city: [] }
+		return {
+			city: [] ,
+			error:getError()
+		}
 		
 	},
 
 	componentDidMount: function() {
 		getCityList(this,setAutoCompleteList);
-		
+		LocationStore.addChangeListener(getError);
 		console.log(this.state.city)
 		
 	},
@@ -57,7 +77,7 @@ var TripAppLocation = React.createClass({
 
 
 	render: function(){
-		
+		console.log(this.state.error.error)
 		
 		return(
 
@@ -70,6 +90,7 @@ var TripAppLocation = React.createClass({
 						<button type="button" className="btn btn-gps" onClick={this._getCoord}>Find My Location </button>
 
 						<button type="button" className="btn btn-next" onClick={this._buttonClick}>Next Page</button>
+						<FlashMessage show={this.state.error.error} message={this.state.error.message} />
 					</div>
 				</div>	
 			</div>
@@ -78,22 +99,43 @@ var TripAppLocation = React.createClass({
 	},
 
 	_getCoord: function(){
-		navigator.geolocation.getCurrentPosition( function(pos){
+		var findLocation = navigator.geolocation.getCurrentPosition( 
+		function(pos){
 			console.log(pos.coords);
-			
+
 			AppActions.findAirport(pos.coords);
+			this.props.nextPage(this.props.currentPage);
 			
-		},
+			
+		}.bind(this),
 		function(err){
-			//hndle location errors
-		});
-		this.props.nextPage(this.props.currentPage);
+			
+			switch(err.code){
+				case 1:
+					AppActions.setError("You need to allow access to your location to continue");
+					console.log(this.props.currentPage);
+					break;
+				default:
+					AppActions.setError(err.message);
+					break;
+			}			
+		}.bind(this) );
+
+
 
 	},
 
 	_buttonClick: function(){
-		AppActions.findAirport();
-		this.props.nextPage(this.props.currentPage);
+		var input = this.props.location.citySearch;
+		
+		if(validateInput(input)){
+			AppActions.findAirport();
+			this.props.nextPage(this.props.currentPage);
+		}
+		else{
+			AppActions.setError("There was a problem with the location you gave");
+			this.setState({error: getError()});
+		}
 
 	},
 
