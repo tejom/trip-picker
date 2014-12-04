@@ -143,7 +143,7 @@ var TripAppResults = React.createClass({
 	_setTripInfo: function (data,city){
 		console.log(data);
 		if(data){										//might get null data when there is an error from api
-			if(data.AveragePrice< this.state.tripPrice){
+			if(data.AveragePrice< this.state.tripPrice && city !== this.prop.location.citySearch){
 				this.setState({	resultCity: city,
 								tripPrice: data.AveragePrice,
 								originCode: data.OrigAirportCode,
@@ -155,9 +155,11 @@ var TripAppResults = React.createClass({
 		}
 
 		if(city == this.state.bestCityMatch[this.state.bestCityMatch.length-1]){
-			this.setState({ready:true});
+			this.setState({ready:true});		//sets the page to be ready to viewed once the array has finished
 		}
+		console.log(this.props.location);
 	}
+
 
 });
 

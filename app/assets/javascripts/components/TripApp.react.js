@@ -77,6 +77,7 @@ var TripApp = React.createClass({
 	nextPage: function(){
 		var currentPage = this.state.currentPage;
 		AppActions.nextPage(currentPage);
+		this._onChange();
 	},
 
 

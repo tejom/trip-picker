@@ -41,8 +41,6 @@ function resetAttributes(){
 }
 var ListStore = merge(EventEmitter.prototype,{
 	getAtrributes: function(){
-		console.log('geting');
-		console.log(_attributes)
 		return _attributes;
 	},
 

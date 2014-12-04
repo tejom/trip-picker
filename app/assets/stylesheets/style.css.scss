@@ -153,7 +153,17 @@ $btn-hover-color-2:#E68A5C;
  background-image: linear-gradient(to bottom, $btn-hover-color-1, $btn-hover-color-2);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=$btn-hover-color-1, endColorstr=$btn-hover-color-2);
 	box-shadow: 1px 1px 1px #aaa;
 }
-
+.btn-gps{
+	background-color: white;
+	border-radius: 8px;
+	display: block;
+	margin:6px auto 0 auto;
+	border:1px solid #ccc;
+	padding:2px 5px 1px 5px;
+}
+.btn-gps:hover{
+	background-color: #ffffd1;
+}
 $offset: 187;
 $duration: 1.4s;
 

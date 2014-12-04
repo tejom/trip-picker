@@ -14,8 +14,22 @@ module.exports = {
 	$.ajax({
 		url: "https://airport.api.aero/airport/match/" + city + "?user_key=9638a0f3d8ab35bb6e22f060025d279a",
 		success:function(data){
-			console.log(data);
+			console.log(data.airports);
 			return callback(city,data.airports);
+			},
+		dataType: 'jsonp'
+
+	});
+	},
+	findGeoAirport: function(lat,long,callback){
+	$.ajax({
+		url: "https://airport.api.aero/airport/nearest/" + lat + "/" + long + "?maxAirports=5&user_key=9638a0f3d8ab35bb6e22f060025d279a",
+		success:function(data){
+			airportArray = data.airports;
+			console.log(airportArray);
+			console.log(data.airports);
+			airportArray.pop();
+			return callback(null,airportArray);
 			},
 		dataType: 'jsonp'
 
@@ -26,7 +40,7 @@ module.exports = {
 		console.log(fromLocation);
 		fromString=this.generateCodeString(fromLocation);
 		toString=this.generateCodeString(toLocation);
-		console.log(toString);
+		
 
 		$.ajax({
 			url: "https://api.hotwire.com/v1/tripstarter/air?apikey=7ej9nc82g5vcbymtqdbb2csw&origin="+fromString+"&dest="+toString+"&format=jsonp&sort=price&sortorder=asc",

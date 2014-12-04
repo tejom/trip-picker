@@ -36,16 +36,28 @@ function clearError(){
 
 
 
-function findAirport(){
-	
+function findAirport(data){
+	if(data){
+		
+		console.log("coordinates passed");
+		console.log(data);
+		AirSearch.findGeoAirport(data.latitude,data.longitude,setAirportCode);
+	}
+	else{
 	AirSearch.findAirport(_location.citySearch,setAirportCode);
-
+	console.log("no coordinates");
+	}
 }
 
 
 function setAirportCode(city,data){
-
+	
 	_location.airportCode = data;
+	if(!city){
+		updateLocation(data[0].city)
+	}
+	console.log("setting to");
+	console.log(data[0].city);
 		
 }
 
@@ -87,7 +99,7 @@ AppDispatcher.register(function(payload){
 			break;
 
 		case TripAppConstants.FIND_AIRPORT:
-			findAirport();
+			findAirport(action.data);
 			break;
 
 		case TripAppConstants.RESET_APP:

@@ -67,12 +67,28 @@ var TripAppLocation = React.createClass({
 						<h2 className="page-title"> Whats your location? </h2>
 						<input id='location-input' ref='locationInput' placeholder={"Enter a US City..."} onBlur={this._save}/>
 						<br />
+						<button type="button" className="btn btn-gps" onClick={this._getCoord}>Find My Location </button>
+
 						<button type="button" className="btn btn-next" onClick={this._buttonClick}>Next Page</button>
 					</div>
 				</div>	
 			</div>
 			);
 		
+	},
+
+	_getCoord: function(){
+		navigator.geolocation.getCurrentPosition( function(pos){
+			console.log(pos.coords);
+			
+			AppActions.findAirport(pos.coords);
+			
+		},
+		function(err){
+			//hndle location errors
+		});
+		this.props.nextPage(this.props.currentPage);
+
 	},
 
 	_buttonClick: function(){

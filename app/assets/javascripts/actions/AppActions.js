@@ -34,10 +34,10 @@ var AppActions = {
 		})
 	},
 
-	findAirport: function(){
+	findAirport: function(data){
 		AppDispatcher.handleAction({
 			actionType: TripAppConstants.FIND_AIRPORT,
-			data: ''
+			data: data
 		})
 	
 	},

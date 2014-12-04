@@ -35,18 +35,15 @@ var TripAppList = React.createClass({
 
 	},
 	addAttribute: function(data){
-			console.log(data);
 			AppActions.addAttribute(data);
 	},
 
 	removeAttribute: function(data){
-		console.log(data);
 		AppActions.removeAttribute(data);
 	},
 
 	handleSearchInput: function(text){
 		var value=this.refs.searchInput.getDOMNode().value
-		console.log(value);
 		this.setState({
 			filter: value
 		});
@@ -57,7 +54,6 @@ var TripAppList = React.createClass({
 		var list = this.props.attributeList;
 		var filter = this.state.filter.toLowerCase();
 		var filteredList = [];
-		console.log(list);
 		list.forEach( function(attribute) {
 			attributeText = attribute.value.toLowerCase();
 
@@ -106,7 +102,7 @@ var TripAppList = React.createClass({
 
 	},
 	_buttonClick: function(){
-		AppActions.findAirport();
+		// AppActions.findAirport();
 		this.props.nextPage(this.props.currentPage);
 
 	},
