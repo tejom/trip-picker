@@ -143,7 +143,7 @@ var TripAppResults = React.createClass({
 	_setTripInfo: function (data,city){
 		console.log(data);
 		if(data){										//might get null data when there is an error from api
-			if(data.AveragePrice< this.state.tripPrice && city !== this.prop.location.citySearch){
+			if(data.AveragePrice< this.state.tripPrice && city !== this.props.location.citySearch){
 				this.setState({	resultCity: city,
 								tripPrice: data.AveragePrice,
 								originCode: data.OrigAirportCode,
