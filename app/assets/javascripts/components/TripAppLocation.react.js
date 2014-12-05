@@ -84,7 +84,7 @@ var TripAppLocation = React.createClass({
 			<div >
 				<div className='location'>
 					<div className='location-panel panel panel-default'>
-						<h2 className="page-title"> Whats your location? </h2>
+						<h2 className="page-title"> What's your location? </h2>
 						<input id='location-input' ref='locationInput' placeholder={"Enter a US City..."} onBlur={this._save}/>
 						<br />
 						<button type="button" className="btn btn-gps" onClick={this._getCoord}>Find My Location </button>

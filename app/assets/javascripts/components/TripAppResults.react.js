@@ -57,7 +57,7 @@ var TripAppResults = React.createClass({
 					<h2 className="page-title"> Results</h2>
 					<h3> Your best city is {this.state.resultCity}</h3>
 					<p> Average price of a  flight from {this.state.originCode} to {this.state.destCode} is ${this.state.tripPrice}</p>
-					<button onClick={this.resetApp} className="btn btn-next"> Find A new Trip</button>
+					<button onClick={this.resetApp} className="btn btn-next"> Find a New Trip</button>
 					</div>
 				</div>
 			</div>
